@@ -1,7 +1,8 @@
-package com.erikssonherlo.taskmanagement.task.service.impl;
+package com.erikssonherlo.taskmanagement.user.mapper.impl;
 
 import com.erikssonherlo.taskmanagement.user.dto.UserDTO;
 import com.erikssonherlo.taskmanagement.user.entity.UserEntity;
+import com.erikssonherlo.taskmanagement.user.mapper.UserMapper;
 import com.erikssonherlo.taskmanagement.user.model.User;
 import org.springframework.stereotype.Component;
 

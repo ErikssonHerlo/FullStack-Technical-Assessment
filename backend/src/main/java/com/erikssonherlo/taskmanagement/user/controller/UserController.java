@@ -13,14 +13,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 @EnableMethodSecurity
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Tag(name = "User Management", description = "Endpoints for managing users (Admin only)")
 public class UserController {
 
@@ -35,6 +36,18 @@ public class UserController {
                 "Users retrieved successfully",
                 HttpStatus.OK,
                 userService.getAllUsers()
+        );
+    }
+
+    @GetMapping("/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER', 'MEMBER')")
+    @Operation(summary = "Get user info", description = "Retrieve information about the authenticated user.")
+    public ApiResponse<UserDTO> getUserInfo(Authentication authentication) {
+        return new ApiResponse<>(
+                HttpStatus.OK.value(),
+                "User retrieved successfully",
+                HttpStatus.OK,
+                userService.getUserInfo(authentication)
         );
     }
 

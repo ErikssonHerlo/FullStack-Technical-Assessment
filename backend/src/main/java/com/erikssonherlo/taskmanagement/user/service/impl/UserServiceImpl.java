@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,14 @@ public class UserServiceImpl implements UserService {
                 savedEntity.getLastName(),
                 savedEntity.getRole()
         );
+    }
+
+    @Override
+    public UserDTO getUserInfo(Authentication authentication) {
+        String email = authentication.getName();
+        UserEntity entity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+        return userMapper.modelToDto(userMapper.entityToModel(entity));
     }
 
 

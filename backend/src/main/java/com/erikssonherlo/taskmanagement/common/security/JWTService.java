@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.erikssonherlo.taskmanagement.user.model.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -86,6 +87,11 @@ public class JWTService {
     private boolean isTokenExpired(String token)
     {
         return getExpiration(token).before(new Date());
+    }
+
+    public Role getRoleFromToken(String token) {
+        Claims claims = getAllClaims(token);
+        return claims.get("role", Role.class);
     }
 
 }
