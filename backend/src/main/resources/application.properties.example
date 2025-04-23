@@ -1,0 +1,38 @@
+# Application Name
+spring.application.name=backend
+
+# Server Configuration
+server.port=8080
+
+# Database Configuration
+spring.datasource.url=jdbc:postgresql://localhost:5432/task_db
+spring.datasource.username=your_db_username
+spring.datasource.password=your_db_password
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+
+# Flyway Migration
+spring.flyway.enabled=true
+spring.flyway.validateOnMigrate=false
+
+# Swagger / OpenAPI Configuration
+springdoc.api-docs.path=/v3/api-docs
+
+# JWT Configuration (Security)
+# IMPORTANT: Use a strong secret key (at least 256 bits). Recommended format: Base64 or Hexadecimal.
+# Example (64 characters hex string / 256-bit key):
+security.jwt.secret=586E3272357538782F413F4428472B4B6250655368566B597033733676397924
+
+# If you prefer Base64, you can generate one with:
+# Linux/MacOS: head -c 32 /dev/urandom | base64
+# Example (Base64 encoded):
+# security.jwt.secret=k38sm1LKwR4kMyhFgbyH1pKxczM+bqgqNU4YxD4G5QA=
+
+# Token expiration time (milliseconds) — 86400000 = 1 day
+security.jwt.expiration=86400000
+
+# Frontend URL (for CORS or redirects)
+frontend.url=http://localhost:5173
+
+# Default Admin Password for Initial Data Loader
+admin.default.password=your_admin_password
