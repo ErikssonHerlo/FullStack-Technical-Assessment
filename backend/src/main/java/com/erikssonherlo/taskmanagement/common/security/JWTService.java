@@ -26,7 +26,7 @@ public class JWTService {
     @Value("${security.jwt.expiration}")
     private Long expirationMs;
 
-    public String getToken(UserDetails user) {
+    public String generateToken(UserDetails user) {
         return getToken(new HashMap<>(), user);
     }
 

@@ -39,21 +39,16 @@ public class UserServiceImpl implements UserService {
 
         System.out.println("DTO: " + userDTO.email());
 
-        // Aquí se hace la conversión directa del DTO al Entity
         UserEntity entity = UserEntity.builder()
                 .email(userDTO.email())
                 .firstName(userDTO.firstName())
                 .lastName(userDTO.lastName())
-                .role(userDTO.role())  // Este campo es tipo Role (Enum)
+                .role(userDTO.role())
                 .password(passwordEncoder.encode("default_password"))
                 .build();
 
-        System.out.println("ENTITY EMAIL: " + entity.getEmail());
-        System.out.println("ENTITY ROLE: " + entity.getRole() + " - " + entity.getRole().getClass());
-
         UserEntity savedEntity = userRepository.save(entity);
 
-        // Conversión directa del Entity a DTO (también sin mapper)
         return new UserDTO(
                 savedEntity.getEmail(),
                 savedEntity.getFirstName(),

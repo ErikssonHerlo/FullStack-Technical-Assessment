@@ -118,4 +118,19 @@ public class GlobalExceptionHandler {
         ApiResponse apiResponse = new ApiResponse(HttpStatus.UNAUTHORIZED.value(), "Invalid email or password", HttpStatus.UNAUTHORIZED, null);
         return new ResponseEntity<>(apiResponse, HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler({
+            org.springframework.security.access.AccessDeniedException.class,
+            org.springframework.security.authorization.AuthorizationDeniedException.class
+    })
+    public ResponseEntity<ApiResponse> handleAccessDeniedException(Exception ex) {
+        ApiResponse apiResponse = new ApiResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                "Access denied: Unauthorized",
+                HttpStatus.UNAUTHORIZED,
+                null
+        );
+        return new ResponseEntity<>(apiResponse, HttpStatus.UNAUTHORIZED);
+    }
+
 }
