@@ -1,4 +1,4 @@
-package com.erikssonherlo.taskmanagement.user.mapper;
+package com.erikssonherlo.taskmanagement.task.service.impl;
 
 import com.erikssonherlo.taskmanagement.user.dto.UserDTO;
 import com.erikssonherlo.taskmanagement.user.entity.UserEntity;
