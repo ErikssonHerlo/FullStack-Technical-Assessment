@@ -7,11 +7,13 @@ import ChatCard from '../../components/Chat/ChatCard';
 import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
 import DefaultLayout from '../../layout/DefaultLayout';
+import Board from '../Board';
 
 const ManagerDashboard: React.FC = () => {
   return (
     <DefaultLayout>
-      <h1 className="text-2xl font-bold">Manager Dashboard</h1>
+      <Board>
+      </Board>
     </DefaultLayout>
   );
 };
