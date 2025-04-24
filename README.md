@@ -1,6 +1,208 @@
 # 🏷️ Task Management Web Application
 
 
+This project is the **Task Management Web App**, developed as part of the **Full Stack Developer Test**. The main goal was to build a simple but functional task management system that allows users to:
+
+- **Create, update, delete, and list tasks**
+- **Organize tasks by status**: `To Do`, `In Progress`, `Done`
+- **Set due dates and priorities for tasks**
+- **Visualize tasks in a Kanban-style board**
+
+The challenge was designed to evaluate both **backend** and **frontend** skills, including API design, authentication, error handling, state management, and user experience.
+
+The expected stack was:
+- **Backend:** Java 17+ with Spring Boot  
+- **Frontend:** React with TypeScript  
+
+Additionally, the test encouraged implementing **bonus features** like JWT-based authentication, drag-and-drop functionality for tasks, and responsive UI using component libraries such as **Material UI** or **TailwindCSS**.
+
+---
+
+## ✅ What Was Implemented
+
+### 🎯 Core Functionality
+- **JWT Authentication (Login and Registration):**
+  - Supports user roles: `ADMIN`, `MANAGER`, and `MEMBER`.
+  - New users are automatically registered as `MEMBER`.
+
+- **Task Management REST API (Backend):**
+  - CRUD operations for tasks via a RESTful API.
+  - PostgreSQL as the database engine.
+  - Graceful error handling with clear status codes.
+
+- **Kanban Board (Frontend):**
+  - Built using **Material UI**, **dnd-kit**, and **TailwindCSS**.
+  - Drag-and-drop implemented at the UI level for task reordering (pending backend integration).
+  - Designed to display tasks grouped by status (`To Do`, `In Progress`, `Done`).
+
+### 🧑‍💻 User Management (ADMIN-only view):
+- CRUD operations for managing users via the backend.
+- Only available for users with the `ADMIN` role.
+
+### 🛠️ Frontend Features:
+- **Sign In / Sign Up pages with JWT token handling.**
+- **Role-based redirection:** Users are routed to the correct dashboard (`ADMIN`, `MANAGER`, `MEMBER`) after login.
+- **Kanban Board view available for all roles.**
+- **Responsive design** and light/dark mode switch.
+
+---
+
+## 🎉 Summary of Deliverables
+| Feature                         | Status        |
+|----------------------------------|---------------|
+| Task CRUD via REST API           | ✅ Completed (Pending to Implement on UI)  |
+| JWT Authentication (Login/Register) | ✅ Completed |
+| User CRUD (Admin only)           | ✅ Completed (Pending to Implement on UI) |
+| Kanban Board (Frontend)          | ✅ UI Ready (Backend sync pending) |
+| Drag-and-Drop (dnd-kit)          | ✅ Implemented in UI |
+| Role-based Access Control        | ✅ Completed  |
+| Responsive UI with MUI + TailwindCSS | ✅ Completed |
+| Error Handling (Backend + Frontend) | ✅ Completed |
+| Documentation and Architecture   | ✅ Included   |
+
+---
+
+> 🟢 **Note:** Despite the pending features, the project successfully demonstrates the core requirements of task management and user authentication, along with a clear modular structure and proper separation of concerns.
+
+---
+
+
+# 📌 Task Management App — Frontend
+
+## 📝 Overview
+
+This project is the **frontend** of the **Task Management App**, a simple system designed to handle user management and task organization using a Kanban board approach.
+
+The frontend was developed with:
+
+- **React 18**
+- **TypeScript**
+- **Vite** as the bundler
+- **TailwindCSS** for styling
+- **Material UI (MUI)** for components
+- **dnd-kit** for drag-and-drop functionality
+- **react-hook-form + yup** for form validation
+- **JWT Authentication**
+
+---
+
+## 🎨 Application Structure
+
+The application consists of three main views, differentiated by user roles:
+
+| Role    | Access                                   | Description                         |
+|---------|------------------------------------------|-------------------------------------|
+| **ADMIN**   | User Management + Kanban Board          | Can create, edit, and view all users. Full access to the Kanban Board. |
+| **MANAGER** | Kanban Board only                      | Can manage their own tasks. No access to user management.              |
+| **MEMBER**  | Kanban Board only (auto-assigned on sign up) | Can only manage their own tasks. Limited permissions.                |
+
+---
+
+## 🔐 Authentication Flow
+
+- **Sign In:** Allows existing users to log in using their credentials.  
+- **Sign Up:** Allows registration of new **MEMBER** users (default role).  
+  - Registration requires: `firstName`, `lastName`, `email`, and `password`.  
+- After successful login or registration, users are redirected to their corresponding dashboard based on their role.
+
+---
+
+## 📂 Folder Structure
+
+```
+src/
+├── components/            # Reusable UI components (Sidebar, Header, Breadcrumb, etc.)
+├── pages/                 # Page views (SignIn, SignUp, Dashboards, Kanban Board)
+├── services/              # API calls (AuthService, UserService, TaskService)
+├── hooks/                 # Custom React hooks
+├── utils/                 # Utility functions (getDashboardPath, etc.)
+├── types/                 # TypeScript type definitions
+├── layout/                # Layout wrappers (DefaultLayout, LoginLayout)
+├── images/                # Static assets (logos, illustrations, icons)
+├── css/                   # TailwindCSS and global styles
+└── main.tsx               # App entry point
+```
+
+---
+
+## 🚀 Running the Project
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/ErikssonHerlo/Task-Management-App.git
+cd Task-Management-App/frontend
+```
+
+2. **Install dependencies:**
+```bash
+npm install
+```
+
+3. **Create your environment configuration:**
+```bash
+cp .env.example .env
+```
+
+**.env.example:**
+```env
+VITE_API_BASE_URL=http://localhost:8080/api/v1
+```
+
+4. **Run the development server:**
+```bash
+npm run dev
+```
+
+5. **Build for production:**
+```bash
+npm run build
+```
+
+6. **Preview the production build:**
+```bash
+npm run preview
+```
+
+---
+
+## 🛠️ Services Implemented
+
+### ✅ Authentication (`/auth`)
+- `loginRequest(email, password)`
+- `registerRequest(payload)`  
+  (Auto-assigns `MEMBER` role)
+- `fetchUserInfo(token)`
+
+### ✅ Users (`/users`)
+- `getAllUsers()`
+- `getUserById(id)`
+- `createUser(payload)`
+- `updateUser(id, payload)`
+- `deleteUser(id)`
+
+### ✅ Tasks (`/tasks`)
+- `getAllTasks()`
+- `getTaskById(id)`
+- `createTask(payload)`
+- `updateTask(id, payload)`
+- `deleteTask(id)`
+
+---
+
+
+## ⚠️ Time Constraints and Pending Features
+
+Due to limited time, **full backend integration with the Kanban board** was not completed. The frontend logic for the Kanban board is ready, but the persistence layer (connecting the drag-and-drop updates to the backend) remains pending.
+
+The following features were planned but not fully implemented:
+- Live task filtering and sorting.
+- Unit or integration tests.
+- Better state management (Redux, Zustand) for scalable state handling.
+- Backend support for task ordering and column updates via drag-and-drop.
+
+---
+
+
 # 📝 Task Management Backend – Java Spring Boot
 
 ## 📚 Overview
@@ -280,6 +482,11 @@ The current architecture and role-based access control system lay the groundwork
 - **Kanban task reordering**  
   The task service is capable of supporting multiple statuses and custom flows (up to 5+ stages). A drag-and-drop interface can be introduced to allow task reordering, with positional tracking in the database.
 
+- Add **encrypted request handling** and refresh token logic.
+- Improve **folder architecture** on Frontend App, e.g., applying a **streaming architecture** or feature-based structure.
+- Use state managers like **Zustand** or **Redux** for better state control as the app scales.
+- Fix visual bugs from **MUI** and **dnd-kit** interactions.
+
 ---
 
 # ❓ Q&A – Technical Decisions
@@ -333,7 +540,9 @@ The architecture was intentionally designed to be **modular, role-aware, and eas
   - Message brokers (e.g., RabbitMQ, Kafka) could be used for **notifications**, background processing, and auditing.
   - WebSocket or Server-Sent Events can provide **real-time updates** to connected clients.
 
-This foundation, combined with careful adherence to clean principles and domain separation, ensures the backend can evolve to support thousands of users, real-time interaction, and enterprise-grade functionality with minimal rework.
+- Consider **migrating to Next.js** to leverage SSR/SSG and API routes.
+
+This foundation, combined with careful adherence to clean principles and domain separation, ensures the backend & frontend can evolve to support thousands of users, real-time interaction, and enterprise-grade functionality with minimal rework.
 
 ---
 
