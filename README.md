@@ -265,7 +265,7 @@ src/main/java/com/erikssonherlo/taskmanagement/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ErikssonHerlo/Leverest-FullStack-Dev-Test.git
+   git clone https://github.com/ErikssonHerlo/FullStack-Technical-Assessment.git
    cd backend/
    ```
 
